@@ -13,7 +13,7 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, phone):
-        if len(phone) == 10:
+        if len(phone) == 10 and phone.isdigit():
             super().__init__(phone)
         else:
             raise ValueError('Phone number is not valid.')
@@ -31,8 +31,8 @@ class Record:
         self.phones.remove(phone)
 
     def edit_phone(self, old_phone, new_phone):
-        self.remove_phone(old_phone)
         self.add_phone(new_phone)
+        self.remove_phone(old_phone)
 
     def find_phone(self, phone_number):
         phone = list(filter(lambda phone: phone.value == phone_number, self.phones))
